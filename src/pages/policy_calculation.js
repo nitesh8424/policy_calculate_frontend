@@ -46,6 +46,7 @@ const PolicyCal = () => {
         if (!validate.valid) {
             setIsLoading(false);
             alert(validate.message);
+            return
         }
         if (policyDetails.age < 23 || policyDetails.age > 56) {
             setPolicyDetails((prev) => ({
