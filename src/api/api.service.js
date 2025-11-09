@@ -1,8 +1,10 @@
 
+const baseUrl = process.env.REACT_APP_URL || 'http://localhost:5000';
+
 function loginRequest(data) {
     return new Promise(async (resolve, reject) => {
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            const response = await fetch(`${baseUrl}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,7 +28,7 @@ function loginRequest(data) {
 function registerRequest(data) {
     return new Promise(async (resolve, reject) => {
         try {
-            const response = await fetch('http://localhost:5000/register', {
+            const response = await fetch(`${baseUrl}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,7 +51,7 @@ function getPolicyDetails(data) {
     return new Promise(async (resolve, reject) => {
         const user = JSON.parse(localStorage.getItem('user'));
         try {
-            const response = await fetch('http://localhost:5000/get_policy_details', {
+            const response = await fetch(`${baseUrl}/get_policy_details`, {
                 method: 'GET',
                 params: data,
                 headers: { authorization: `Bearer ${user.token || ''}` }
@@ -70,7 +72,7 @@ function calculatePolicy(data) {
     return new Promise(async (resolve, reject) => {
         const user = JSON.parse(localStorage.getItem('user'));
         try {
-            const response = await fetch('http://localhost:5000/policy_calculation', {
+            const response = await fetch(`${baseUrl}/policy_calculation`, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: { authorization: `Bearer ${user.token || ''}`, 'Content-Type': 'application/json' }
