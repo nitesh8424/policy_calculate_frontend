@@ -4,7 +4,7 @@ import Header from "./Header";
 
 function IllustrationPage() {
     const location = useLocation();
-    const [data, setData] = useState(() => {
+    const [data] = useState(() => {
         return location.state.data || JSON.parse(localStorage.getItem('policy_details'));
     });
 

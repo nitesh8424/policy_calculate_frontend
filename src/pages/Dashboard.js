@@ -4,7 +4,7 @@ import Header from "./Header";
 
 function Dashboard() {
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
+    const [user] = useState(JSON.parse(localStorage.getItem('user')) || {});
 
 
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ function Dashboard() {
         if (!user.username) {
             navigate('/')
         }
-    }, [user]);
+    }, [user,navigate]);
 
     return (
         <div>

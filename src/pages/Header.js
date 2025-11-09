@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
+    const [user] = useState(JSON.parse(localStorage.getItem("user")) || {});
     const navigate = useNavigate();
     const timeRef = useRef(0);
     const displayRef = useRef(null);
