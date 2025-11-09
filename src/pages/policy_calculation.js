@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { calculatePolicy } from "../api/api.service";
+import validateSumAssured from "../utils/utils";
+import Loader from "../components/loader";
 
 const PolicyCal = () => {
     const [policyDetails, setPolicyDetails] = useState({
@@ -15,6 +17,7 @@ const PolicyCal = () => {
         ppt: ''
     });
 
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -38,16 +41,24 @@ const PolicyCal = () => {
     }
     const calculate_policy = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
+        const validate = validateSumAssured(policyDetails.modal_premium, policyDetails.sum_assured, policyDetails.premium_frequency);
+        if (!validate.valid) {
+            setIsLoading(false);
+            alert(validate.message);
+        }
         if (policyDetails.age < 23 || policyDetails.age > 56) {
             setPolicyDetails((prev) => ({
                 ...prev,
                 dob: '',
                 age: ''
             }));
+            setIsLoading(false);
             alert('Age should min 23 and max 56');
             return
         }
         const data = await calculatePolicy(policyDetails);
+        setIsLoading(false)
         navigate('/policy_illustration', { state: data })
     }
 
@@ -125,6 +136,7 @@ const PolicyCal = () => {
                     </table>
                 </div>
             </form>
+            {isLoading && <Loader/>}
         </div>
     )
 }
