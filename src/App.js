@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PolicyDetailsPage from './pages/policy_details';
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import IllustrationPage from './pages/IllustrationPage';
+import PolicyCal from './pages/policy_calculation';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/policy_calculate' element={<PolicyCal />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/policy_illustration' element={<IllustrationPage />} />
+          <Route path="/policy_details" element={<PolicyDetailsPage />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
